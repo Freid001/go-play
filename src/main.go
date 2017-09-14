@@ -2,27 +2,38 @@ package main
 
 import (
 	"flag"
+	"os"
 	"fmt"
-	_ "github.com/urfave/cli"
 )
 
 func main() {
-	flag.Parse()
-	arg := flag.Arg(0)
+	//Commands
+	fizzBuzzCommand := flag.NewFlagSet(FIZZBUZZ, flag.ExitOnError)
 
+	//Options
+	fizzBuzzNumbersString := fizzBuzzCommand.String("numbers", "", "Comma separated string of number. (Required)")
 
+	if len(os.Args) < 2 {
+		flag.PrintDefaults()
 
+		fmt.Println("Commands:")
+		fmt.Println("   "+FIZZBUZZ+"\t for multiples of three print 'Fizz' and for multiples of five print 'Buzz'.")
+		return
+	}
 
-	switch arg{
+	switch os.Args[1] {
 	case FIZZBUZZ:
-		//fmt.Print("Enter numbers: ")
-		////numbers, _ := reader.ReadString('');
-
-		//Run fizz buzz
-		playFizzBuzz(numbers)
+		fizzBuzzCommand.Parse(os.Args[2:])
 	default:
-		fmt.Println("Commands:");
-		fmt.Println("");
-		fmt.Println("    fizzbuzz \t for multiples of three print 'Fizz' and for multiples of five print 'Buzz'.");
+		flag.PrintDefaults()
+		return
+	}
+
+	if fizzBuzzCommand.Parsed() {
+		if *fizzBuzzNumbersString == "" {
+			fizzBuzzCommand.PrintDefaults()
+		}else {
+			playFizzBuzz(*fizzBuzzNumbersString)
+		}
 	}
 }

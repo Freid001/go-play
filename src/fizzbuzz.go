@@ -2,8 +2,8 @@ package main
 
 import (
 	"strings"
-	"strconv"
 	"fmt"
+	"strconv"
 )
 
 const FIZZBUZZ = "fizzbuzz"
@@ -15,33 +15,33 @@ type FizzBuzz struct{
 }
 
 func playFizzBuzz(numbersString string){
-
 	//Split numbers string into array
 	numbers := strings.Split(numbersString, ",")
 
 	//Iterate over array
 	for i := 0; i < len(numbers); i += 1 {
 
-		//Convert number to int
-		number, err := strconv.ParseInt(numbers[i], 10, 0)
+		//Do we have a value?
+		if(numbers[i] == ""){
+			continue
+		}
 
-		fmt.Print(err)
+		//Convert number to int
+		number, _ := strconv.ParseInt(numbers[i], 10, 0)
 
 		//Is this a fizz buzz number?
 		fizzBuzz := isNumberAFizzBuzz(number)
-
-		//fmt.Print(fizzBuzz)
 
 		//Output our number
 		fmt.Print("# " + strconv.FormatInt(fizzBuzz.Number, 10) + " ");
 
 		//Output FIZZ
-		if(fizzBuzz.Fizz){
+		if (fizzBuzz.Fizz) {
 			fmt.Print("[FIZZ]");
 		}
 
 		//Output BUZZ
-		if(fizzBuzz.Buzz){
+		if (fizzBuzz.Buzz) {
 			fmt.Print("[BUZZ]");
 		}
 
