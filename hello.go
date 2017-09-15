@@ -2,8 +2,10 @@ package main
 
 import "fmt"
 
-const HELLO = "hello"
+type Hello struct {
+	Name string
+}
 
-func hello(name string) {
-	fmt.Println("Hello " + name + "!")
+func (hello *Hello) hello() {
+	fmt.Println("Hello " + hello.Name + "!")
 }

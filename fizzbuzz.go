@@ -4,9 +4,8 @@ import (
 	"strings"
 	"fmt"
 	"strconv"
+	"os"
 )
-
-const FIZZBUZZ = "fizzbuzz"
 
 type FizzBuzz struct{
 	Number int64
@@ -27,25 +26,31 @@ func playFizzBuzz(numbersString string){
 		}
 
 		//Convert number to int
-		number, _ := strconv.ParseInt(numbers[i], 10, 0)
+		number, err := strconv.ParseInt(numbers[i], 10, 0)
+
+		//Output error
+		if(err != nil) {
+			fmt.Fprintf(os.Stderr, "Encountered error: %v", err)
+			fmt.Println();
+			break;
+		}
 
 		//Is this a fizz buzz number?
 		fizzBuzz := isNumberAFizzBuzz(number)
-
-		//Output our number
-		fmt.Print("# " + strconv.FormatInt(fizzBuzz.Number, 10) + " ");
+		defer fmt.Println();
 
 		//Output FIZZ
 		if (fizzBuzz.Fizz) {
-			fmt.Print("[FIZZ]");
+			defer fmt.Print("[FIZZ]");
 		}
 
 		//Output BUZZ
 		if (fizzBuzz.Buzz) {
-			fmt.Print("[BUZZ]");
+			defer fmt.Print("[BUZZ]");
 		}
 
-		fmt.Println();
+		//Output our number
+		defer fmt.Print("# " + strconv.FormatInt(fizzBuzz.Number, 10) + " ");
 	}
 }
 
