@@ -4,6 +4,8 @@ import (
 	"math/rand"
 	"fmt"
 	"time"
+	"github.com/c-bata/go-prompt"
+	"strconv"
 	"os"
 )
 
@@ -22,25 +24,29 @@ func (guessNumber *GuessNumber) setNumber() {
 	}
 }
 
+func completer(d prompt.Document) []prompt.Suggest {
+	s := []prompt.Suggest{}
+	return prompt.FilterHasPrefix(s, d.GetWordBeforeCursor(), true)
+}
+
 func (guessNumber *GuessNumber) playGuessNumber(){
 	for i := 0; i <= GuessingChances-1; i++ {
 
 		//Request a input guess
-		fmt.Print("Guess: ")
-		var k int
-		guess, err := fmt.Scanf("%d", &k)
+		fmt.Println("Make a guess")
+		guess := prompt.Input("> ", completer)
 
-		fmt.Println(guess);
+		//Convert to int
+		number, err := strconv.Atoi(guess);
 
-		//Output error
-		if(err != nil) {
+		if(err == nil){
 			fmt.Fprintf(os.Stderr, "Encountered error: %v", err)
 			fmt.Println();
 			break;
 		}
 
 		//Is this guess the correct answer?
-		if(guessNumber.isAnswer(guess)){
+		if(guessNumber.isAnswer(number)){
 			break;
 		}
 	}
