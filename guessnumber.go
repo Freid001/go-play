@@ -39,7 +39,7 @@ func (guessNumber *GuessNumber) playGuessNumber(){
 		//Convert to int
 		number, err := strconv.Atoi(guess);
 
-		if(err == nil){
+		if(err != nil){
 			fmt.Fprintf(os.Stderr, "Encountered error: %v", err)
 			fmt.Println();
 			break;
@@ -73,7 +73,7 @@ func (guessNumber *GuessNumber) isAnswer(guess int) (bool) {
 		return false;
 	}
 
-	fmt.Printf("Good job! You guessed my number in %d guesses!", guessNumber.Guesses)
+	fmt.Printf("Good job! You guessed my number in %d guesses! \n", guessNumber.Guesses)
 
 	return true;
 }

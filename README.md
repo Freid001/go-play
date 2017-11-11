@@ -1,12 +1,22 @@
-# go-play
-A simple go lang demo for beginners.
+# Go Play
+
+# About 
+* A series of simple cli games.
+* The purpose of this project was to gain some experience writing an application in Golang.
+
+## Requirements
+* [Docker](https://www.docker.com/) 
 
 ## Installation
 ```bash
-go get github.com/freid001/go-play
+// build 
+docker build -t go_play .
+
+// run
+docker run -it go_play bash
 ```
 
-## Useage
+# Useage
 
 ```bash
 // run
@@ -18,7 +28,7 @@ go run *.go hello -name="your_name"
 // time
 go run *.go time
 
-// guess Number
+// guess number
 go run *.go guessnumber
 
 // fizzbuss
