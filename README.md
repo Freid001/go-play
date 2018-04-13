@@ -1,13 +1,13 @@
 # Go Play
 
-# About 
+## About 
 * A series of simple cli games.
 * The purpose of this project was to gain some experience writing an application in Golang.
 
-## Requirements
+### Requirements
 * [Docker](https://www.docker.com/) 
 
-## Installation
+### Installation
 ```bash
 // build 
 docker build -t go_play .
@@ -16,7 +16,7 @@ docker build -t go_play .
 docker run -it go_play bash
 ```
 
-# Useage
+## Useage
 
 ```bash
 // run
