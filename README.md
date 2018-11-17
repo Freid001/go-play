@@ -16,7 +16,7 @@ docker build -t go_play .
 docker run -it go_play bash
 ```
 
-## Useage
+## Usage
 
 ```bash
 // run
